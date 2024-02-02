@@ -2,11 +2,12 @@
 This is a toy SQS consumer written in python, its purpose it to help explore different async options and try different 
 concurrency scenarios (messages with fast vs slow processing times).
 
-Started with a non-async consumer and then grew it into an async example.
+If you wanted to deploy this somewhere, you would need to extract urls and related configuration. I only ever took this
+as far as local development.
 
 Using localstack SQS for the queue and wiremock for the consumer to execute an HTTP call against.
 
-The tests are very basic.
+The automated tests are very basic, verifies basic SQS 
 
 # Local Development - Guide
 
