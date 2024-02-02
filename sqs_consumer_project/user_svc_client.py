@@ -14,6 +14,8 @@ class UserSvcClient:
         self.record_user_path = "/record_user"
 
     async def record_user(self, message: ExampleSQSMessageModel) -> RecordUserResponse | None:
+        # TODO - This is not initially intended to be optimized, just yanked the HTTP call code out to its
+        #  own place so we can experiment/iterate on different configurations of setup (connection pooling) and testing.
         async with httpx.AsyncClient() as client:
             json_body = message.model_dump_json()
 
