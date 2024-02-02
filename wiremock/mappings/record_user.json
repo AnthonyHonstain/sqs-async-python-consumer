@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/record_user"
+  },
+  "response": {
+    "status": 200,
+    "body": "{\"user_id\": \"xxxxxx\"}",
+    "headers": {
+      "Content-Type": "text/plain"
+    },
+    "fixedDelayMilliseconds": 4000
+  }
+}

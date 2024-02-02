@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  localstack:
+    image: localstack/localstack:3.1.0
+    ports:
+      - "4566:4566" # LocalStack's default edge port
+      - "4571:4571" # Deprecated port, but can be included for backward compatibility
+    environment:
+      - SERVICES=sqs
+      #- DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+    volumes:
+      # https://docs.localstack.cloud/getting-started/installation/#docker-compose
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+
+  wiremock:
+    image: wiremock/wiremock:3.3.1-2
+    ports:
+      - "8080:8080" # Default Wiremock port
+    volumes:
+      - ./wiremock:/home/wiremock
+    command: --verbose
+
+  localstack-init:
+    image: amazon/aws-cli:2.15.15
+    depends_on:
+      - localstack
+    environment:
+      AWS_ACCESS_KEY_ID: 'test'
+      AWS_SECRET_ACCESS_KEY: 'test'
+      AWS_DEFAULT_REGION: 'us-east-1'
+    volumes:
+      - ./init-localstack.sh:/init-localstack.sh  # Corrected volume mount
+    entrypoint: /bin/sh
+    command: -c "/init-localstack.sh"
