@@ -24,12 +24,12 @@ class UserSvcClient:
                 response.raise_for_status()
             except HTTPError as exc:
                 logging.error("Failed with HTTP error", extra={"error": exc})
-                return
+                return None
 
             try:
                 record_user_response = RecordUserResponse(**response.json())
                 logging.info("Received response", extra={"user_id": record_user_response.user_id})
             except ValidationError as e:
                 logging.error("Failed to deserialize response", extra={"error": e})
-                return
+                return None
         return record_user_response
