@@ -1,13 +1,13 @@
 {
   "request": {
     "method": "POST",
-    "url": "/record_user"
+    "url": "/usercore/users/"
   },
   "response": {
     "status": 200,
-    "body": "{\"user_id\": \"xxxxxx\"}",
+    "body": "{\"id\": \"xxxxxx\"}",
     "headers": {
-      "Content-Type": "text/plain"
+      "Content-Type": "application/json"
     },
     "fixedDelayMilliseconds": 4000
   }

@@ -14,6 +14,6 @@ async def do_work(message: ExampleSQSMessageModel, user_svc_client: UserSvcClien
 
     logging.info(
         "Completed work",
-        extra={"message_name": message.name, "message_age": message.age, "user_id": record_user_response.user_id},
+        extra={"message_name": message.name, "message_age": message.age, "user_id": record_user_response.id},
     )
     return True

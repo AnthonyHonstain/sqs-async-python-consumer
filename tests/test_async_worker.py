@@ -10,10 +10,10 @@ from sqs_consumer_project.user_svc_client import UserSvcClient
 @pytest.mark.asyncio
 @respx.mock
 async def test_do_work__successful_post():
-    url = "http://localhost:8080/record_user"
-    expected_content = b'"{\\"name\\":\\"Test Name\\",\\"age\\":21}"'
+    url = "http://localhost:8080/usercore/users/"
+    expected_content = b'{"name": "Test Name", "age": 21}'
 
-    post_route = respx.post(url).mock(return_value=Response(200, json={"user_id": "123"}))
+    post_route = respx.post(url).mock(return_value=Response(200, json={"id": "123"}))
 
     test_message = ExampleSQSMessageModel(name="Test Name", age=20)
 
@@ -28,8 +28,8 @@ async def test_do_work__successful_post():
 @pytest.mark.asyncio
 @respx.mock
 async def test_do_work__failed_post():
-    url = "http://localhost:8080/record_user"
-    respx.post(url).mock(return_value=Response(500, json={"user_id": "123"}))
+    url = "http://localhost:8080/usercore/users/"
+    respx.post(url).mock(return_value=Response(500, json={"id": "123"}))
 
     test_message = ExampleSQSMessageModel(name="Test Name", age=20)
 
@@ -40,7 +40,7 @@ async def test_do_work__failed_post():
 @pytest.mark.asyncio
 @respx.mock
 async def test_do_work__expected_post_result():
-    url = "http://localhost:8080/record_user"
+    url = "http://localhost:8080/usercore/users/"
     respx.post(url).mock(return_value=Response(200, json={"UNKNOWN": "UNEXPECTED_RESPONSE"}))
 
     test_message = ExampleSQSMessageModel(name="Test Name", age=20)

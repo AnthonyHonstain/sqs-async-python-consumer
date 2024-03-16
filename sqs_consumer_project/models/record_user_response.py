@@ -1,5 +1,7 @@
+from typing import Union
+
 from pydantic import BaseModel
 
 
 class RecordUserResponse(BaseModel):
-    user_id: str
+    id: Union[str, int]
